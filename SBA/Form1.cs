@@ -32,6 +32,19 @@ public partial class SBA : Form
             LineAlignment = StringAlignment.Center
         };
 
+        if (ships.Count == 0)
+        {
+            graphics.DrawString(
+                "No ships to display",
+                labelFont,
+                Brushes.Black,
+                ClientSize.Width / 2,
+                ClientSize.Height / 2,
+                labelFormat
+            );
+            return;
+        }
+
         int maxPosition = quaySize; // Maximum position on X axis
         int maxTime = ships.Max(s => s.departureTime); // Maximum time on Y axis
 
@@ -64,20 +77,11 @@ public partial class SBA : Form
         {
             float x = ((margin * 0.83f) + i * cellSize);
             xPoints[i] = x + 7f;
-            if (i % 5 == 0)
-            {
-                graphics.DrawString(
-                    i.ToString(),
-                    Font,
-                    Brushes.Black,
-                    x,
-                    ClientSize.Height - margin
-                );
-            }
+            graphics.DrawString(i.ToString(), Font, Brushes.Black, x, ClientSize.Height - margin);
             if (i != 0)
             {
                 graphics.DrawLine(
-                    axisPen,
+                    new Pen(Brushes.DarkRed, 5),
                     x + 7f,
                     (float)ClientSize.Height - margin,
                     x + 7f,
@@ -98,11 +102,14 @@ public partial class SBA : Form
             else
             {
                 float y = ClientSize.Height - ((margin * 0.83f) + i * cellSize);
-                if (i % 5 == 0)
-                {
-                    graphics.DrawString(i.ToString(), Font, Brushes.Black, margin - 20, y);
-                }
-                graphics.DrawLine(axisPen, margin, y + 7f, (float)margin + 10, y + 7f);
+                graphics.DrawString(i.ToString(), Font, Brushes.Black, margin - 20, y);
+                graphics.DrawLine(
+                    new Pen(Brushes.DarkRed, 5),
+                    margin,
+                    y + 7f,
+                    (float)margin + 10,
+                    y + 7f
+                );
                 yPoints[i] = y + 7f;
             }
         }
@@ -115,7 +122,7 @@ public partial class SBA : Form
             float width = xPoints[ship.endPosition] - xPoints[ship.startPosition];
             float height = (yPoints[ship.departureTime] - yPoints[ship.arrivalTime]) * -1;
             //graphics.FillRectangle(new SolidBrush(Color.Beige), x, y, width, height);
-            DrawRoundedRectangle(graphics, axisPen, Brushes.Beige, x, y, width, height, 20);
+            DrawRoundedRectangle(graphics, axisPen, Brushes.Beige, x, y, width, height, 30);
 
             // Draw ship label
             graphics.DrawString(

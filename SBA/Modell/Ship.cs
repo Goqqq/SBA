@@ -8,7 +8,7 @@ namespace SBA;
 
 public class Ship
 {
-    public int ID { get; init; }
+    public int ID { get; set; }
     private int _size;
     public int Size
     {
@@ -55,7 +55,6 @@ public class Ship
             }
         }
     }
-    private static UniqueIDGenerator generator = new UniqueIDGenerator();
 
     public Ship(int handlingTime, int size)
     {
@@ -63,7 +62,7 @@ public class Ship
         {
             HandlingTime = handlingTime;
             Size = size;
-            ID = generator.GenerateID();
+            //ID = generator.GenerateID();
         }
         catch (ArgumentException)
         {
@@ -88,17 +87,5 @@ public class Ship
         }
 
         return copyList;
-    }
-}
-
-public class UniqueIDGenerator
-{
-    private static int counter;
-
-    public int GenerateID()
-    {
-        int uniqueID = counter;
-        counter++;
-        return uniqueID;
     }
 }
