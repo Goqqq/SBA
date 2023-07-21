@@ -70,6 +70,9 @@ public class Allocator
     private List<Ship> A; // Menge der zugeordneten Schiffe
     private HashSet<int> ASet; // Menge der zugeordneten Schiffe (als Hashset für schnelle Überprüfung)
     private Dictionary<int, Tuple<int, int>> finalShips; // Schlüssel: Schiff-ID, Wert: (Anliegezeitpunkt, Liegeposition)
+    private Benchmark allocateShipsBench;
+
+    List<Benchmark> benchmarks;
 
     public Allocator(List<Ship> ships, Quay quay)
     {
@@ -88,11 +91,16 @@ public class Allocator
         A = new List<Ship>();
         ASet = new HashSet<int>();
         finalShips = new Dictionary<int, Tuple<int, int>>();
+
+        allocateShipsBench = new Benchmark();
+        benchmarks.Add(allocateShipsBench);
     }
 
     public void AllocateShips()
     {
         // Alle Schiffe durchgehen
+        allocateShipsBench.Start();
+
         while (A.Count < ships.Count)
         {
             // Das aktuelle Schiff zuerst auf null setzen
@@ -259,6 +267,7 @@ public class Allocator
                 "time"
             );
         }
+        allocateShipsBench.Stop();
         //foreach (var ship in finalShips)
         //{
         //    RemoveForbiddenValues(ship.Key); // Verbotene Positionen und Zeiten von aktuellem Schiff entfernen
@@ -737,7 +746,8 @@ public class Allocator
                     s[ship.ID],
                     s[ship.ID] + ship.HandlingTime,
                     b[ship.ID],
-                    b[ship.ID] + ship.Size
+                    b[ship.ID] + ship.Size,
+                    benchmarks
                 )
             );
         }

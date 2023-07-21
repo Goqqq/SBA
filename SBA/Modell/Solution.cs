@@ -13,8 +13,16 @@ public class Solution
     public int departureTime { get; init; }
     public int startPosition { get; init; }
     public int endPosition { get; init; }
+    public List<Benchmark> benchmarks { get; init; }
 
-    public Solution(int ID, int arrivalTime, int departureTime, int startPosition, int endPosition)
+    public Solution(
+        int ID,
+        int arrivalTime,
+        int departureTime,
+        int startPosition,
+        int endPosition,
+        List<Benchmark> benchmarks
+    )
     {
         try
         {
@@ -40,6 +48,7 @@ public class Solution
             this.departureTime = departureTime;
             this.startPosition = startPosition;
             this.endPosition = endPosition;
+            this.benchmarks = benchmarks;
         }
         catch (ArgumentException ex)
         {
@@ -55,4 +64,15 @@ public class Solution
             // throw;
         }
     }
+
+    //public TimeSpan GetBenchmarkTime()
+    //{
+    //    //TimeSpan sum = TimeSpan.Zero;
+    //    //foreach (Benchmark bm in benchmarks)
+    //    //{
+    //    //    sum += bm.Elapsed;
+    //    //}
+    //    //return sum;
+    //    return benchmarks.Aggregate(TimeSpan.Zero, (sum, current));
+    //}
 }

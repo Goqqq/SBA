@@ -1,17 +1,17 @@
 Ships:15
-ID:1, Size:3, Handling:6
-ID:2, Size:7, Handling:6
-ID:3, Size:6, Handling:10
-ID:4, Size:7, Handling:5
-ID:5, Size:4, Handling:6
-ID:6, Size:5, Handling:8
-ID:7, Size:3, Handling:9
-ID:8, Size:4, Handling:8
-ID:9, Size:5, Handling:10
-ID:10, Size:7, Handling:7
-ID:11, Size:5, Handling:7
-ID:12, Size:7, Handling:10
-ID:13, Size:3, Handling:5
-ID:14, Size:3, Handling:5
-ID:15, Size:6, Handling:10
+ID:1, Size:7, Handling:7
+ID:2, Size:7, Handling:8
+ID:3, Size:5, Handling:5
+ID:4, Size:3, Handling:7
+ID:5, Size:5, Handling:8
+ID:6, Size:7, Handling:5
+ID:7, Size:4, Handling:7
+ID:8, Size:6, Handling:7
+ID:9, Size:3, Handling:7
+ID:10, Size:6, Handling:6
+ID:11, Size:7, Handling:7
+ID:12, Size:5, Handling:10
+ID:13, Size:7, Handling:6
+ID:14, Size:6, Handling:10
+ID:15, Size:7, Handling:8
 QuayCapacity:10

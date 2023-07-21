@@ -23,7 +23,7 @@ internal static class Program
         int maxLength = 10;
         int minLayTime = 3;
         int maxLayTime = 7;
-        int numberOfInstancesPerValue = 2;
+        int numberOfInstancesPerValue = 5;
         int[] berthLengthValues = { 5, 10, 15 };
         int seed = 42;
 

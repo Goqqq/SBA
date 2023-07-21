@@ -8,14 +8,14 @@ namespace SBA;
 
 public partial class SBA : Form
 {
-    private List<Solution> ships;
+    private List<Solution> solutions;
     private int quaySize;
 
-    public SBA(List<Solution> ships, int quaySize)
+    public SBA(List<Solution> solutions, int quaySize)
     {
         InitializeComponent();
         BackColor = Color.White;
-        this.ships = ships;
+        this.solutions = solutions;
         this.quaySize = quaySize;
         Load += SBA_Load;
         Paint += SBA_Paint;
@@ -33,7 +33,7 @@ public partial class SBA : Form
             LineAlignment = StringAlignment.Center
         };
 
-        if (ships.Count == 0)
+        if (solutions.Count == 0)
         {
             graphics.DrawString(
                 "No ships to display",
@@ -47,7 +47,7 @@ public partial class SBA : Form
         }
 
         int maxPosition = quaySize; // Maximum position on X axis
-        int maxTime = ships.Max(s => s.departureTime); // Maximum time on Y axis
+        int maxTime = solutions.Max(s => s.departureTime); // Maximum time on Y axis
 
         // Draw x-axis
         int margin = 50;
@@ -115,7 +115,7 @@ public partial class SBA : Form
             yPoints[i] = y + 7f;
         }
 
-        foreach (Solution ship in ships)
+        foreach (Solution ship in solutions)
         {
             // Draw ship
             float x = xPoints[ship.startPosition];
@@ -140,12 +140,13 @@ public partial class SBA : Form
     {
         int width = ClientSize.Width;
         int height = ClientSize.Height;
-        int biggestDepartureTime = ships
+        int biggestDepartureTime = solutions
             .OrderByDescending(s => s.departureTime)
             .First()
             .departureTime;
+        //TimeSpan totalBenchmarkTime = solutions.Sum(solution => solution.GetBenchmarkTime());
         string infoText =
-            $"Capacity: {quaySize},\t Ships: {ships.Count},\t Time: {biggestDepartureTime}.";
+            $"Capacity: {quaySize},\t Ships: {solutions.Count},\t Time: {biggestDepartureTime}.";
 
         // Create a bitmap with the same size as the form
         using (Bitmap bitmap = new Bitmap(width, height))
