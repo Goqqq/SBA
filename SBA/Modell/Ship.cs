@@ -9,6 +9,7 @@ namespace SBA;
 public class Ship
 {
     public int ID { get; set; }
+    private int IDname { get; init; }
     private int _size;
     public int Size
     {
@@ -56,13 +57,13 @@ public class Ship
         }
     }
 
-    public Ship(int handlingTime, int size)
+    public Ship(int IDname, int handlingTime, int size)
     {
         try
         {
             HandlingTime = handlingTime;
             Size = size;
-            //ID = generator.GenerateID();
+            this.IDname = IDname;
         }
         catch (ArgumentException)
         {
@@ -72,7 +73,7 @@ public class Ship
 
     public override string ToString()
     {
-        return $"Ship Details: ID={ID}, HandlingTime={HandlingTime}, Size={Size}";
+        return $"Ship Details: ID={IDname}, HandlingTime={HandlingTime}, Size={Size}";
     }
 
     public static List<Ship> DeepCopy(List<Ship> originalList)
@@ -81,7 +82,8 @@ public class Ship
 
         foreach (Ship ship in originalList)
         {
-            Ship copyShip = new Ship(ship.HandlingTime, ship.Size) { ID = ship.ID, };
+            // remove 1 from ID because the ID is 1-based in the input files!!!!!!!!!!!!!!
+            Ship copyShip = new Ship(1, ship.HandlingTime, ship.Size) { ID = ship.ID, };
 
             copyList.Add(copyShip);
         }

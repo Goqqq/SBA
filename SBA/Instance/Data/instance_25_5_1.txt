@@ -1,0 +1,27 @@
+Ships:25
+ID:1, Size:5, Handling:10
+ID:2, Size:5, Handling:7
+ID:3, Size:6, Handling:9
+ID:4, Size:4, Handling:10
+ID:5, Size:4, Handling:10
+ID:6, Size:7, Handling:6
+ID:7, Size:6, Handling:8
+ID:8, Size:7, Handling:7
+ID:9, Size:5, Handling:5
+ID:10, Size:4, Handling:10
+ID:11, Size:7, Handling:10
+ID:12, Size:3, Handling:10
+ID:13, Size:5, Handling:6
+ID:14, Size:7, Handling:5
+ID:15, Size:6, Handling:7
+ID:16, Size:7, Handling:8
+ID:17, Size:7, Handling:6
+ID:18, Size:3, Handling:9
+ID:19, Size:6, Handling:7
+ID:20, Size:6, Handling:5
+ID:21, Size:4, Handling:8
+ID:22, Size:4, Handling:7
+ID:23, Size:6, Handling:8
+ID:24, Size:4, Handling:8
+ID:25, Size:3, Handling:8
+QuayCapacity:5

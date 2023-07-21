@@ -16,10 +16,43 @@ public class Solution
 
     public Solution(int ID, int arrivalTime, int departureTime, int startPosition, int endPosition)
     {
-        this.ID = ID;
-        this.arrivalTime = arrivalTime;
-        this.departureTime = departureTime;
-        this.startPosition = startPosition;
-        this.endPosition = endPosition;
+        try
+        {
+            if (arrivalTime < 0)
+            {
+                throw new ArgumentException("Arrival time cannot have a negative value");
+            }
+            else if (departureTime < 0)
+            {
+                throw new ArgumentException("Departure time cannot have a negative value");
+            }
+            else if (startPosition < 0)
+            {
+                throw new ArgumentException("Start position cannot have a negative value");
+            }
+            else if (endPosition < 0)
+            {
+                throw new ArgumentException("End position cannot have a negative value");
+            }
+
+            this.ID = ID;
+            this.arrivalTime = arrivalTime;
+            this.departureTime = departureTime;
+            this.startPosition = startPosition;
+            this.endPosition = endPosition;
+        }
+        catch (ArgumentException ex)
+        {
+            // Display an error message to the user or log the error for debugging
+            MessageBox.Show(
+                $"{ex.Message}. {ex.StackTrace}",
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+            );
+            Environment.Exit(1);
+            // You can also choose to re-throw the exception to propagate it further up the call stack
+            // throw;
+        }
     }
 }

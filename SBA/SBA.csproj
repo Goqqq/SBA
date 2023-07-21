@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.6" />
     <PackageReference Include="ScottPlot" Version="4.1.64" />
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.64" />
   </ItemGroup>
@@ -26,6 +27,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Instance\Data\" />
   </ItemGroup>
 
 </Project>

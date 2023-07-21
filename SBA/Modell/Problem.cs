@@ -37,14 +37,19 @@ public class Problem
     }
 }
 
-internal class UniqueIDGenerator
+public class UniqueIDGenerator
 {
-    private static int counter;
+    public static int counter;
 
     public int GenerateID()
     {
         int uniqueID = counter;
         counter++;
         return uniqueID;
+    }
+
+    public static void ResetCounter()
+    {
+        counter = 0;
     }
 }

@@ -14,11 +14,12 @@ public partial class SBA : Form
     public SBA(List<Solution> ships, int quaySize)
     {
         InitializeComponent();
-        this.BackColor = Color.White;
+        BackColor = Color.White;
         this.ships = ships;
         this.quaySize = quaySize;
-        this.Load += SBA_Load;
-        this.Paint += SBA_Paint;
+        Load += SBA_Load;
+        Paint += SBA_Paint;
+        //SaveDrawingAsImage();
     }
 
     private void SBA_Paint(object sender, PaintEventArgs e)
@@ -68,14 +69,13 @@ public partial class SBA : Form
         // Draw y-axis
         graphics.DrawLine(axisPen, margin, margin, margin, margin + yAxisLength);
 
-        int cellSize = xAxisLength / maxPosition;
         // Set the size of each cell in the grid
-        //int cellSize = quaySize * ships.Count;
+        float cellSize = xAxisLength / maxPosition;
 
         // Draw coordinate numbers along x-axis
         for (int i = 0; i <= quaySize; i++)
         {
-            float x = ((margin * 0.83f) + i * cellSize);
+            float x = (margin + i * cellSize);
             xPoints[i] = x + 7f;
             graphics.DrawString(i.ToString(), Font, Brushes.Black, x, ClientSize.Height - margin);
             if (i != 0)
@@ -94,14 +94,15 @@ public partial class SBA : Form
         // Draw coordinate numbers along y-axis
         for (int i = 0; i <= maxTime; i++)
         {
-            //float y = ClientSize.Height - (margin + 0.83f * cellSize);
+            float y = ClientSize.Height - (margin + i * cellSize);
             if (i == 0)
             {
                 yPoints[i] = ClientSize.Height - margin;
+                continue;
             }
-            else
+            else if (i % 5 == 0)
             {
-                float y = ClientSize.Height - ((margin * 0.83f) + i * cellSize);
+                //float y = ClientSize.Height - ((margin * 1f) + i * cellSize);
                 graphics.DrawString(i.ToString(), Font, Brushes.Black, margin - 20, y);
                 graphics.DrawLine(
                     new Pen(Brushes.DarkRed, 5),
@@ -110,8 +111,8 @@ public partial class SBA : Form
                     (float)margin + 10,
                     y + 7f
                 );
-                yPoints[i] = y + 7f;
             }
+            yPoints[i] = y + 7f;
         }
 
         foreach (Solution ship in ships)
@@ -121,7 +122,6 @@ public partial class SBA : Form
             float y = yPoints[ship.departureTime];
             float width = xPoints[ship.endPosition] - xPoints[ship.startPosition];
             float height = (yPoints[ship.departureTime] - yPoints[ship.arrivalTime]) * -1;
-            //graphics.FillRectangle(new SolidBrush(Color.Beige), x, y, width, height);
             DrawRoundedRectangle(graphics, axisPen, Brushes.Beige, x, y, width, height, 30);
 
             // Draw ship label
@@ -133,6 +133,43 @@ public partial class SBA : Form
                 y + height / 2,
                 labelFormat
             );
+        }
+    }
+
+    public void SaveDrawingAsImage(int drawingID)
+    {
+        int width = ClientSize.Width;
+        int height = ClientSize.Height;
+        int biggestDepartureTime = ships
+            .OrderByDescending(s => s.departureTime)
+            .First()
+            .departureTime;
+        string infoText =
+            $"Capacity: {quaySize},\t Ships: {ships.Count},\t Time: {biggestDepartureTime}.";
+
+        // Create a bitmap with the same size as the form
+        using (Bitmap bitmap = new Bitmap(width, height))
+        {
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.Clear(Color.White); // Set the background to white
+                // Call the SBA_Paint method to draw the graphics on the bitmap
+                SBA_Paint(this, new PaintEventArgs(graphics, new Rectangle(0, 0, width, height)));
+
+                Font textFont = new Font("Arial", 12, FontStyle.Bold);
+                Brush textBrush = Brushes.Black;
+                StringFormat textFormat = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Far
+                };
+                RectangleF textRect = new RectangleF(0, height - 100, width, 100);
+                graphics.DrawString(infoText, textFont, textBrush, textRect, textFormat);
+            }
+
+            // Save the bitmap as an image file (e.g., PNG format)
+            string filePath = $"D:/C#/Master_SBA/SBA/Results/result{drawingID}.png"; // Replace this with your desired file path
+            bitmap.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
         }
     }
 

@@ -1,0 +1,7 @@
+Ships:5
+ID:1, Size:3, Handling:7
+ID:2, Size:6, Handling:5
+ID:3, Size:5, Handling:9
+ID:4, Size:6, Handling:5
+ID:5, Size:7, Handling:5
+QuayCapacity:10
