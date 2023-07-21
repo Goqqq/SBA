@@ -93,7 +93,7 @@ public class Allocator
         finalShips = new Dictionary<int, Tuple<int, int>>();
 
         allocateShipsBench = new Benchmark();
-        benchmarks.Add(allocateShipsBench);
+        //benchmarks.Add(allocateShipsBench);
     }
 
     public void AllocateShips()
@@ -268,24 +268,24 @@ public class Allocator
             );
         }
         allocateShipsBench.Stop();
-        //foreach (var ship in finalShips)
-        //{
-        //    RemoveForbiddenValues(ship.Key); // Verbotene Positionen und Zeiten von aktuellem Schiff entfernen
+        foreach (var ship in finalShips)
+        {
+            RemoveForbiddenValues(ship.Key); // Verbotene Positionen und Zeiten von aktuellem Schiff entfernen
 
-        //    OptimizePositions(ships[ship.Key]); // Position des aktuellen Schiffes optimieren
+            OptimizePositions(ships[ship.Key]); // Position des aktuellen Schiffes optimieren
 
-        //    // Die verbotenen Positionen und Zeiten setzen
-        //    UpdateForbiddenIntervals(
-        //        s[ship.Key],
-        //        Tuple.Create(b[ship.Key], b[ship.Key] + ships[ship.Key].Size),
-        //        "position"
-        //    );
-        //    UpdateForbiddenIntervals(
-        //        b[ship.Key],
-        //        Tuple.Create(s[ship.Key], s[ship.Key] + ships[ship.Key].HandlingTime),
-        //        "time"
-        //    );
-        //}
+            // Die verbotenen Positionen und Zeiten setzen
+            UpdateForbiddenIntervals(
+                s[ship.Key],
+                Tuple.Create(b[ship.Key], b[ship.Key] + ships[ship.Key].Size),
+                "position"
+            );
+            UpdateForbiddenIntervals(
+                b[ship.Key],
+                Tuple.Create(s[ship.Key], s[ship.Key] + ships[ship.Key].HandlingTime),
+                "time"
+            );
+        }
     }
 
     /// <summary> Entfernt die verbotenen Zeiten und Positionen vom Schiff </summary>
