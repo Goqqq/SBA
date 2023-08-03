@@ -136,7 +136,7 @@ public partial class SBA : Form
         }
     }
 
-    public void SaveDrawingAsImage(int drawingID)
+    public void SaveDrawingAsImage(string filename)
     {
         int width = ClientSize.Width;
         int height = ClientSize.Height;
@@ -169,7 +169,7 @@ public partial class SBA : Form
             }
 
             // Save the bitmap as an image file (e.g., PNG format)
-            string filePath = $"D:/C#/Master_SBA/SBA/Results/result{drawingID}.png"; // Replace this with your desired file path
+            string filePath = $"C:/Users/Torben/source/repos/SBA/SBA/Results/{filename}.png"; // Replace this with your desired file path
             bitmap.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
         }
     }

@@ -5,6 +5,7 @@ using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 
 namespace SBA;
 
@@ -41,7 +42,7 @@ internal static class Program
         );
 
         string[] filePaths = Directory.GetFiles(
-            Path.Combine(Environment.CurrentDirectory, "D:/C#/Master_SBA/SBA/Instance/Data"),
+            Path.Combine(Environment.CurrentDirectory, "C:/Users/Torben/source/repos/SBA/SBA/Instance/Data"),
             "*.txt"
         );
         Application.EnableVisualStyles();
@@ -54,13 +55,24 @@ internal static class Program
             Allocator allocator = new(problem.Ships, problem.Quay);
             allocator.AllocateShips();
             List<Solution> solution = allocator.GetSolution();
+            
             // Draw the form and save the result as an image
             using (SBA form = new SBA(solution, instance.Quay.Capacity))
             {
                 //form.ShowDialog();
-                form.SaveDrawingAsImage(counter++);
+                form.SaveDrawingAsImage($"result{counter}");
+            }
+
+            GurobiOptimizer grb = new GurobiOptimizer(problem);
+            List<Solution> grb_solution = grb.Solve();
+            // Draw the form and save the result as an image
+            using (SBA form = new SBA(grb_solution, instance.Quay.Capacity))
+            {
+                //form.ShowDialog();
+                form.SaveDrawingAsImage($"result_gurobi{counter}");
             }
             UniqueIDGenerator.ResetCounter();
+            counter++;
         }
 
         //Quay quay = new Quay(10);

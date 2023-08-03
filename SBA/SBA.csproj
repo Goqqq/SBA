@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +32,12 @@
 
   <ItemGroup>
     <Folder Include="Instance\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Gurobi100.NET">
+      <HintPath>..\..\..\..\..\..\gurobi1001\win64\bin\Gurobi100.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

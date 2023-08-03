@@ -51,7 +51,7 @@ public class BerthAllocationInstance
 
         string dataDirectory = Path.Combine(
             Environment.CurrentDirectory,
-            "D:/C#/Master_SBA/SBA/Instance/Data"
+            "C:/Users/Torben/source/repos/SBA/SBA/Instance/Data"
         );
 
         foreach (int numberOfShips in numberOfShipsValues)
